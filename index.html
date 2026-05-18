@@ -759,6 +759,50 @@
             transition: all 0.3s;
         }
 
+        .work-timeline::before {
+            left: 24px;
+            transform: none;
+        }
+
+        .work-timeline .timeline-item {
+            width: 100%;
+            left: 0;
+            text-align: left;
+            padding-left: 4rem;
+            padding-right: 0;
+        }
+
+        .work-timeline .timeline-dot,
+        .work-timeline .timeline-item:nth-child(odd) .timeline-dot,
+        .work-timeline .timeline-item:nth-child(even) .timeline-dot {
+            left: 16px;
+            right: auto;
+        }
+
+        .work-timeline .timeline-item:nth-child(odd),
+        .work-timeline .timeline-item:nth-child(even) {
+            left: 0;
+            text-align: left;
+            padding-left: 4rem;
+            padding-right: 0;
+        }
+
+        .work-summary {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .work-points {
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .work-points li::marker {
+            color: var(--accent);
+        }
+
         .timeline-content:hover {
             border-color: var(--accent);
             box-shadow: var(--shadow-sm);
@@ -884,6 +928,107 @@
 
         .project-links a:hover {
             color: var(--accent);
+        }
+
+        .cert-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .cert-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color 0.3s;
+        }
+
+        .cert-links a:hover {
+            color: var(--accent);
+        }
+
+        .viewer-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 14, 23, 0.82);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 2000;
+        }
+
+        .viewer-modal.active {
+            display: flex;
+        }
+
+        .viewer-panel {
+            width: min(1100px, 100%);
+            max-height: 90vh;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .viewer-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .viewer-close {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .viewer-close:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: rgba(74, 144, 226, 0.08);
+        }
+
+        .viewer-body {
+            min-height: 65vh;
+            background: rgba(10, 14, 23, 0.7);
+        }
+
+        .viewer-body iframe,
+        .viewer-body img {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .viewer-body img {
+            object-fit: contain;
+            padding: 1rem;
         }
 
         /* ===== CERTIFICATES ===== */
@@ -1238,7 +1383,6 @@
             }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -1262,6 +1406,7 @@
                 <li><a href="#about">关于</a></li>
                 <li><a href="#skills">技能</a></li>
                 <li><a href="#education">教育</a></li>
+                <li><a href="#experience">经验</a></li>
                 <li><a href="#projects">项目</a></li>
                 <li><a href="#certificates">证书</a></li>
                 <li><a href="#contact">联系</a></li>
@@ -1303,6 +1448,10 @@
                         <a href="#contact" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i>
                             联系我
+                        </a>
+                        <a href="Resume_HOPE 浩然.pdf" class="btn btn-outline view-trigger" data-view-type="pdf" data-view-src="Resume_HOPE 浩然.pdf" data-view-title-en="Resume" data-view-title-zh="简历">
+                            <i class="fas fa-eye"></i>
+                            查看简历
                         </a>
                         <a href="Resume_HOPE 浩然.pdf" class="btn btn-outline" download>
                             <i class="fas fa-download"></i>
@@ -1501,6 +1650,33 @@
         </div>
     </section>
 
+    <!-- Work Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">工作经验</span>
+                <h2 class="section-title">专业经历</h2>
+                <p class="section-subtitle">以客户需求为导向的微电网方案分析、设计与技术支持经验</p>
+            </div>
+            <div class="timeline work-timeline">
+                <div class="timeline-item work-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2026年3月27日 - 2026年5月31日</span>
+                        <h3>技术工程师</h3>
+                        <p class="school company">StarCharge</p>
+                        <p class="work-summary">在 StarCharge 担任技术工程师期间，我面向不同客户场景开展微电网方案分析与技术设计，确保解决方案同时满足业务目标、能源需求与实施可行性。</p>
+                        <ul class="work-points">
+                            <li>调研并分析客户侧用能需求、负载特征与应用场景，提出有针对性的微电网解决方案。</li>
+                            <li>完成微电网系统方案设计与技术分析，确保配置方案满足客户的功能需求、运行目标与技术约束。</li>
+                            <li>在方案沟通与技术评估过程中，将复杂的能源系统需求转化为清晰、可执行的设计建议。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
@@ -1562,6 +1738,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="project-card reveal">
+                    <div class="project-image" style="background: linear-gradient(135deg, #0f766e 0%, #1d4ed8 100%);">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">AI</span>
+                            <span class="project-tag">LSTM</span>
+                            <span class="project-tag">微电网</span>
+                        </div>
+                        <h3>故障检测与分类项目</h3>
+                        <p>基于 LSTM 深度学习模型开展微电网故障检测与分类研究，通过时序数据建模提升对不同故障类型的识别能力与检测准确率。</p>
+                        <div class="project-links">
+                            <a href="#"><i class="fas fa-file-alt"></i> 项目概览</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1581,6 +1774,9 @@
                         <h4>最佳口头报告奖</h4>
                         <p>第八届 BDAI 国际会议（西安交通大学-利物浦大学）</p>
                         <div class="cert-date">2025年8月</div>
+                        <div class="cert-links">
+                            <a href="Best Oral Presentation Award.jpg" class="view-trigger" data-view-type="image" data-view-src="Best Oral Presentation Award.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
                     </div>
                 </div>
                 <div class="cert-card reveal">
@@ -1589,6 +1785,9 @@
                         <h4>BDAI 参与证书</h4>
                         <p>国际大数据与人工智能会议，录用论文编号：AT25-1812</p>
                         <div class="cert-date">2025年</div>
+                        <div class="cert-links">
+                            <a href="Conference Certificate.jpg" class="view-trigger" data-view-type="image" data-view-src="Conference Certificate.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
                     </div>
                 </div>
                 <div class="cert-card reveal">
@@ -1597,6 +1796,53 @@
                         <h4>HSK 四级语言能力证书</h4>
                         <p>汉语水平考试，证明流利的中文沟通能力</p>
                         <div class="cert-date">已获证</div>
+                        <div class="cert-links">
+                            <a href="Certificate of Acheivement.jpg" class="view-trigger" data-view-type="image" data-view-src="Certificate of Acheivement.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-icon"><i class="fas fa-award"></i></div>
+                    <div class="cert-content">
+                        <h4>学术展示表达证书</h4>
+                        <p>Crafting Academic Presentations 培训与学术展示能力提升证书</p>
+                        <div class="cert-date">已获证</div>
+                        <div class="cert-links">
+                            <a href="Crafting Academic presentations.jpg" class="view-trigger" data-view-type="image" data-view-src="Crafting Academic presentations.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-icon"><i class="fas fa-medal"></i></div>
+                    <div class="cert-content">
+                        <h4>丝绸之路奖项认证</h4>
+                        <p>Silk and Road Prize 相关荣誉认证</p>
+                        <div class="cert-date">已获证</div>
+                        <div class="cert-links">
+                            <a href="Silk and Road Prize Certification.jpg" class="view-trigger" data-view-type="image" data-view-src="Silk and Road Prize Certification.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-icon"><i class="fas fa-star"></i></div>
+                    <div class="cert-content">
+                        <h4>StarCharge 新星认证</h4>
+                        <p>StarCharge 内部认可与新星荣誉证书</p>
+                        <div class="cert-date">2026年</div>
+                        <div class="cert-links">
+                            <a href="Starcharge New Star Certification.jpg" class="view-trigger" data-view-type="image" data-view-src="Starcharge New Star Certification.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cert-card reveal">
+                    <div class="cert-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="cert-content">
+                        <h4>优秀学生认证</h4>
+                        <p>Exelent Student Certification 学业表现与综合能力相关认证</p>
+                        <div class="cert-date">已获证</div>
+                        <div class="cert-links">
+                            <a href="Exelent Student Certification.jpg" class="view-trigger" data-view-type="image" data-view-src="Exelent Student Certification.jpg"><i class="fas fa-eye"></i> 查看证书</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1637,11 +1883,25 @@
                             <span>中国, 江苏省, 南京市浦口区 210044</span>
                         </div>
                     </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <strong>GitHub</strong>
+                            <span>KazadiHope</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-weixin"></i>
+                        <div>
+                            <strong>WeChat ID</strong>
+                            <span>Zadie21</span>
+                        </div>
+                    </div>
 
                     <div class="social-links">
                         <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" title="WeChat"><i class="fab fa-weixin"></i></a>
+                        <a href="https://github.com/KazadiHope" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#contact" title="WeChat: Zadie21"><i class="fab fa-weixin"></i></a>
                         <a href="mailto:hopekazadi2@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
@@ -1680,16 +1940,28 @@
         </div>
     </footer>
 
+    <div class="viewer-modal" id="viewerModal" aria-hidden="true">
+        <div class="viewer-panel">
+            <div class="viewer-header">
+                <div class="viewer-title" id="viewerTitle">Preview</div>
+                <button class="viewer-close" id="viewerClose" type="button" aria-label="Close viewer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="viewer-body" id="viewerBody"></div>
+        </div>
+    </div>
+
     <script>
         const translations = {
             en: {
                 metaTitle: 'Hope Kazadi | Solutions Engineer & AI Graduate Researcher',
                 metaDescription: 'Hope Kazadi - Solutions Engineer and AI graduate researcher focused on intelligent energy, power systems, and automation.',
-                nav: ['Home', 'About', 'Skills', 'Education', 'Projects', 'Certificates', 'Contact'],
+                nav: ['Home', 'About', 'Skills', 'Education', 'Experience', 'Projects', 'Certificates', 'Contact'],
                 heroBadge: 'Open to solutions engineering opportunities',
                 heroHeading: 'Hello, I am<br><span class="highlight">Hope Kazadi</span>',
                 heroDescription: 'AI graduate researcher with a strong foundation in electrical engineering and mechatronics. I work across power systems analysis, automation control, and intelligent energy solutions for modern infrastructure.',
-                heroButtons: ['Contact Me', 'Download Resume'],
+                heroButtons: ['Contact Me', 'View Resume', 'Download Resume'],
                 heroStats: ['Years of research', 'AI Master\'s', 'Studying in China'],
                 roles: ['Solutions Engineer', 'AI Graduate Researcher', 'Electrical Engineer', 'Energy Systems Specialist'],
                 aboutHeader: ['About Me', 'Profile', 'A solutions engineer focused on intelligent energy and applied AI'],
@@ -1720,23 +1992,39 @@
                     ['Sep 2022 - Jun 2024', 'Bachelor of Electrical Engineering and Automation', 'Nanjing University of Information Science and Technology · Nanjing', 'Built strong expertise in power systems analysis, electric machine theory, modern control theory, and industrial automation. Laboratory work, grid simulation, and energy distribution optimization sharpened both my analytical and applied engineering skills.'],
                     ['Sep 2019 - Jun 2022', 'Diploma in Mechatronics Engineering', 'Harbin Vocational & Technical College · Harbin', 'Developed solid fundamentals in robotics control, hydraulic systems, circuits, and automated production lines. Practical projects covered assembly, programming, troubleshooting, and energy-efficient automation scenarios.']
                 ],
+                workHeader: ['Experience', 'Work Experience', 'Client-focused experience in microgrid analysis, solution design, and technical support'],
+                workExperience: [
+                    ['Mar 27, 2026 - May 31, 2026', 'Technical Engineer', 'StarCharge', 'Worked as a Technical Engineer at StarCharge, leading microgrid solution analysis and technical design for diverse client scenarios while aligning proposals with business goals, energy requirements, and implementation feasibility.', [
+                        'Assessed client energy needs, load profiles, and application scenarios to recommend tailored microgrid solutions.',
+                        'Analyzed and designed microgrid configurations that met client expectations as well as technical and operational requirements.',
+                        'Converted complex energy-system requirements into clear, actionable solution recommendations during technical evaluation and client discussions.'
+                    ]]
+                ],
                 projectsHeader: ['Projects', 'Research and Projects', 'Selected work across energy systems, AI, and automation'],
                 projects: [
                     [['AI', 'Deep Learning', 'Geospatial'], 'DSM Super-Resolution Reconstruction', 'Current master\'s research project using deep learning to enhance digital surface model resolution for infrastructure planning. Models are trained and optimized with TensorFlow and PyTorch.', ['Paper in preparation', 'Code']],
                     [['Energy', 'Microgrid', 'Simulation'], 'Smart Microgrid Energy Management System', 'A MATLAB/Simulink microgrid simulation project that optimizes energy allocation for distributed PV storage systems, improving both grid stability and energy efficiency.', ['View Details']],
-                    [['Automation', 'PLC', 'Hardware'], 'Intelligent Charging Equipment Control System', 'Designed and implemented an automated control system for charging infrastructure, combining mechatronics and electrical engineering with circuit design, PLC programming, and fault diagnosis.', ['View Details']]
+                    [['Automation', 'PLC', 'Hardware'], 'Intelligent Charging Equipment Control System', 'Designed and implemented an automated control system for charging infrastructure, combining mechatronics and electrical engineering with circuit design, PLC programming, and fault diagnosis.', ['View Details']],
+                    [['AI', 'LSTM', 'Microgrid'], 'Fault Detection and Classification Project', 'Developed an LSTM-based deep learning approach for fault detection and classification in a microgrid, using time-series system data to improve recognition of fault conditions and operational anomalies.', ['Project Overview']]
                 ],
                 certificatesHeader: ['Certificates', 'Awards and Credentials', 'Academic achievements and professional recognition'],
                 certificates: [
                     ['Best Oral Presentation Award', 'The 8th BDAI International Conference (Xi\'an Jiaotong-Liverpool University)', 'Aug 2025'],
-                    ['BDAI Participation Certificate', 'International Conference on Big Data and Artificial Intelligence, accepted paper ID: AT25-1812', '2025'],
-                    ['HSK Level 4 Certificate', 'Chinese proficiency certificate demonstrating fluent communication ability', 'Certified']
+                    ['Conference Certificate', 'International Conference on Big Data and Artificial Intelligence, accepted paper ID: AT25-1812', '2025'],
+                    ['Certificate of Achievement', 'Chinese language achievement certificate demonstrating strong communication ability', 'Certified'],
+                    ['Academic Presentation Certificate', 'Crafting Academic Presentations training certificate focused on presentation and communication skills', 'Certified'],
+                    ['Silk and Road Prize Certification', 'Award certification recognizing Silk and Road-related academic achievement', 'Certified'],
+                    ['StarCharge New Star Certification', 'StarCharge recognition certificate highlighting strong performance and contribution', '2026'],
+                    ['Excellent Student Certification', 'Recognition certificate highlighting strong academic performance and overall achievement', 'Certified']
                 ],
+                certificateLinkLabel: 'View Certificate',
+                viewerClose: 'Close viewer',
+                viewerFallbackTitle: 'Preview',
                 contactHeader: ['Contact', 'Let\'s Connect', 'Open to roles, collaborations, and project conversations'],
                 contactTitle: 'Let\'s work together',
                 contactDescription: 'I am looking for opportunities in solutions engineering, AI applications, and energy systems. If you have a role or collaboration in mind, feel free to reach out.',
-                contactItems: ['Email', 'Phone', 'Location'],
-                location: 'Pukou District, Nanjing, Jiangsu, China 210044',
+                contactItems: ['Email', 'Phone', 'Location', 'GitHub', 'WeChat ID'],
+                contactValues: ['hopekazadi2@gmail.com', '+86 159 5198 7121', 'Pukou District, Nanjing, Jiangsu, China 210044', 'KazadiHope', 'Zadie21'],
                 formLabels: ['Name', 'Email', 'Subject', 'Message'],
                 formPlaceholders: ['Your name', 'your@email.com', 'Role opportunity / project collaboration / other', 'Tell me about your needs...'],
                 submit: 'Send Message',
@@ -1746,11 +2034,11 @@
             zh: {
                 metaTitle: 'Hope Kazadi | 解决方案工程师 & AI 硕士',
                 metaDescription: 'Hope Kazadi - 解决方案工程师，人工智能硕士，专注于智能能源、电力系统与自动化控制。',
-                nav: ['首页', '关于', '技能', '教育', '项目', '证书', '联系'],
+                nav: ['首页', '关于', '技能', '教育', '经验', '项目', '证书', '联系'],
                 heroBadge: '正在寻找解决方案工程师职位',
                 heroHeading: '你好，我是<br><span class="highlight">Hope Kazadi</span>',
                 heroDescription: '人工智能硕士，拥有扎实的电气工程与机电一体化基础。精通电力系统分析、自动化控制与智能能源解决方案，致力于数字能源领域的创新项目。',
-                heroButtons: ['联系我', '下载简历'],
+                heroButtons: ['联系我', '查看简历', '下载简历'],
                 heroStats: ['年研究经验', '硕士在读', '在华学习工作'],
                 roles: ['解决方案工程师', 'AI 硕士在读', '电气工程师', '能源系统专家'],
                 aboutHeader: ['关于我', '个人简介', '热衷于智能能源与人工智能技术的解决方案工程师'],
@@ -1781,23 +2069,39 @@
                     ['2022年9月 - 2024年6月', '电气工程与自动化学士学位', '南京信息工程大学 · 南京市', '在电力系统分析、电机理论、现代控制理论以及工业应用自动控制系统方面获得了深入的专业知识。通过实验室工作、电网仿真及能源分配系统优化，强化了分析能力。'],
                     ['2019年9月 - 2022年6月', '机电一体化工程文凭', '哈尔滨职业技术学院 · 哈尔滨市', '掌握了机器人控制、液压系统、电路和自动化生产线方面的扎实基础知识。在实际应用中集成机械与电子系统，涵盖节能自动化领域。完成多项故障排除、组装和编程实践项目。']
                 ],
+                workHeader: ['工作经验', '专业经历', '以客户需求为导向的微电网方案分析、设计与技术支持经验'],
+                workExperience: [
+                    ['2026年3月27日 - 2026年5月31日', '技术工程师', 'StarCharge', '在 StarCharge 担任技术工程师期间，我面向不同客户场景开展微电网方案分析与技术设计，确保解决方案同时满足业务目标、能源需求与实施可行性。', [
+                        '调研并分析客户侧用能需求、负载特征与应用场景，提出有针对性的微电网解决方案。',
+                        '完成微电网系统方案设计与技术分析，确保配置方案满足客户的功能需求、运行目标与技术约束。',
+                        '在方案沟通与技术评估过程中，将复杂的能源系统需求转化为清晰、可执行的设计建议。'
+                    ]]
+                ],
                 projectsHeader: ['项目展示', '研究与项目', '涵盖能源系统、人工智能与自动化控制的核心项目'],
                 projects: [
                     [['AI', '深度学习', '地理空间'], 'DSM 超分辨率重建', '当前硕士研究项目，利用深度学习技术提升数字表面模型的分辨率，为基础设施规划提供更高质量的地理空间数据。使用 TensorFlow 和 PyTorch 进行模型训练与优化。', ['论文筹备中', '代码']],
                     [['能源', '微电网', '仿真'], '智能微电网能源管理系统', '基于 MATLAB/Simulink 的微电网仿真项目，优化分布式光伏储能系统的能源分配策略，实现电网稳定性与能源效率的双重提升。', ['查看详情']],
-                    [['自动化', 'PLC', '硬件'], '智能充电设备控制系统', '结合机电一体化与电气工程知识，设计并实现了充电基础设施的自动化控制系统，涵盖电路设计、PLC编程与故障诊断功能。', ['查看详情']]
+                    [['自动化', 'PLC', '硬件'], '智能充电设备控制系统', '结合机电一体化与电气工程知识，设计并实现了充电基础设施的自动化控制系统，涵盖电路设计、PLC编程与故障诊断功能。', ['查看详情']],
+                    [['AI', 'LSTM', '微电网'], '故障检测与分类项目', '基于 LSTM 深度学习模型开展微电网故障检测与分类研究，通过时序数据建模提升对不同故障类型的识别能力与检测准确率。', ['项目概览']]
                 ],
                 certificatesHeader: ['荣誉与证书', '证书与奖项', '学术成就与专业认证'],
                 certificates: [
                     ['最佳口头报告奖', '第八届 BDAI 国际会议（西安交通大学-利物浦大学）', '2025年8月'],
-                    ['BDAI 参与证书', '国际大数据与人工智能会议，录用论文编号：AT25-1812', '2025年'],
-                    ['HSK 四级语言能力证书', '汉语水平考试，证明流利的中文沟通能力', '已获证']
+                    ['会议参与证书', '国际大数据与人工智能会议，录用论文编号：AT25-1812', '2025年'],
+                    ['成就证书', '体现较强中文沟通能力的相关成就证书', '已获证'],
+                    ['学术展示表达证书', 'Crafting Academic Presentations 培训与学术展示能力提升证书', '已获证'],
+                    ['丝绸之路奖项认证', 'Silk and Road Prize 相关荣誉认证', '已获证'],
+                    ['StarCharge 新星认证', 'StarCharge 内部认可与新星荣誉证书', '2026年'],
+                    ['优秀学生认证', 'Exelent Student Certification 学业表现与综合能力相关认证', '已获证']
                 ],
+                certificateLinkLabel: '查看证书',
+                viewerClose: '关闭预览',
+                viewerFallbackTitle: '预览',
                 contactHeader: ['联系我', '建立联系', '有项目合作机会或职位空缺？欢迎随时联系'],
                 contactTitle: '让我们合作',
                 contactDescription: '我正在寻找解决方案工程师、AI 应用工程师或能源系统相关的机会。如果您有合适的职位或项目合作意向，请随时与我联系。',
-                contactItems: ['电子邮箱', '联系电话', '所在位置'],
-                location: '中国, 江苏省, 南京市浦口区 210044',
+                contactItems: ['电子邮箱', '联系电话', '所在位置', 'GitHub', '微信号'],
+                contactValues: ['hopekazadi2@gmail.com', '+86 159 5198 7121', '中国, 江苏省, 南京市浦口区 210044', 'KazadiHope', 'Zadie21'],
                 formLabels: ['姓名', '电子邮箱', '主题', '留言内容'],
                 formPlaceholders: ['您的姓名', 'your@email.com', '职位机会 / 项目合作 / 其他', '请描述您的需求...'],
                 submit: '发送消息',
@@ -1823,12 +2127,13 @@
             experienceBadge: document.querySelector('.experience-badge .text'),
             skillCards: Array.from(document.querySelectorAll('.skills-grid .skill-card')),
             educationItems: Array.from(document.querySelectorAll('.timeline-item')),
+            workItems: Array.from(document.querySelectorAll('.work-item')),
             projectCards: Array.from(document.querySelectorAll('.project-card')),
             certificateCards: Array.from(document.querySelectorAll('.cert-card')),
             contactTitle: document.querySelector('.contact-info h3'),
             contactDescription: document.querySelector('.contact-info > p'),
             contactItems: Array.from(document.querySelectorAll('.contact-item strong')),
-            contactLocation: document.querySelector('.contact-item:last-of-type span'),
+            contactValues: Array.from(document.querySelectorAll('.contact-item span')),
             formLabels: Array.from(document.querySelectorAll('.form-group label')),
             formInputs: [
                 document.getElementById('name'),
@@ -1840,7 +2145,12 @@
             footer: document.querySelector('footer p'),
             metaDescription: document.querySelector('meta[name="description"]'),
             langButtons: Array.from(document.querySelectorAll('.lang-btn')),
-            mobileMenuButton: document.getElementById('mobileMenuBtn')
+            mobileMenuButton: document.getElementById('mobileMenuBtn'),
+            viewerModal: document.getElementById('viewerModal'),
+            viewerBody: document.getElementById('viewerBody'),
+            viewerTitle: document.getElementById('viewerTitle'),
+            viewerClose: document.getElementById('viewerClose'),
+            viewTriggers: Array.from(document.querySelectorAll('.view-trigger'))
         };
 
         const storedLocale = localStorage.getItem('portfolioLang');
@@ -1876,10 +2186,11 @@
             setHTML(translationSelectors.heroHeading, copy.heroHeading);
             setText(translationSelectors.heroDescription, copy.heroDescription);
             setHTML(translationSelectors.heroButtons[0], '<i class="fas fa-paper-plane"></i> ' + copy.heroButtons[0]);
-            setHTML(translationSelectors.heroButtons[1], '<i class="fas fa-download"></i> ' + copy.heroButtons[1]);
+            setHTML(translationSelectors.heroButtons[1], '<i class="fas fa-eye"></i> ' + copy.heroButtons[1]);
+            setHTML(translationSelectors.heroButtons[2], '<i class="fas fa-download"></i> ' + copy.heroButtons[2]);
             translationSelectors.heroStats.forEach((item, index) => setText(item, copy.heroStats[index]));
 
-            [copy.aboutHeader, copy.skillsHeader, copy.educationHeader, copy.projectsHeader, copy.certificatesHeader, copy.contactHeader].forEach((header, index) => {
+            [copy.aboutHeader, copy.skillsHeader, copy.educationHeader, copy.workHeader, copy.projectsHeader, copy.certificatesHeader, copy.contactHeader].forEach((header, index) => {
                 setText(translationSelectors.sectionLabels[index], header[0]);
                 setText(translationSelectors.sectionTitles[index], header[1]);
                 setText(translationSelectors.sectionSubtitles[index], header[2]);
@@ -1908,6 +2219,18 @@
                 setText(item.querySelector('.school + p'), educationCopy[3]);
             });
 
+            translationSelectors.workItems.forEach((item, index) => {
+                const workCopy = copy.workExperience[index];
+                if (!workCopy) return;
+                setText(item.querySelector('.timeline-date'), workCopy[0]);
+                setText(item.querySelector('h3'), workCopy[1]);
+                setText(item.querySelector('.company'), workCopy[2]);
+                setText(item.querySelector('.work-summary'), workCopy[3]);
+                Array.from(item.querySelectorAll('.work-points li')).forEach((point, pointIndex) => {
+                    setText(point, workCopy[4][pointIndex]);
+                });
+            });
+
             translationSelectors.projectCards.forEach((card, index) => {
                 const projectCopy = copy.projects[index];
                 if (!projectCopy) return;
@@ -1927,12 +2250,18 @@
                 setText(card.querySelector('h4'), certificateCopy[0]);
                 setText(card.querySelector('p'), certificateCopy[1]);
                 setText(card.querySelector('.cert-date'), certificateCopy[2]);
+                const certLink = card.querySelector('.cert-links a');
+                if (certLink) {
+                    const icon = certLink.querySelector('i');
+                    const iconHTML = icon ? icon.outerHTML : '';
+                    setHTML(certLink, iconHTML + ' ' + copy.certificateLinkLabel);
+                }
             });
 
             setText(translationSelectors.contactTitle, copy.contactTitle);
             setText(translationSelectors.contactDescription, copy.contactDescription);
             translationSelectors.contactItems.forEach((item, index) => setText(item, copy.contactItems[index]));
-            setText(translationSelectors.contactLocation, copy.location);
+            translationSelectors.contactValues.forEach((item, index) => setText(item, copy.contactValues[index]));
             translationSelectors.formLabels.forEach((item, index) => setText(item, copy.formLabels[index]));
             translationSelectors.formInputs.forEach((input, index) => {
                 if (input) {
@@ -1942,6 +2271,12 @@
             setHTML(translationSelectors.submitButton, '<i class="fas fa-paper-plane"></i> ' + copy.submit);
             setHTML(translationSelectors.footer, copy.footer);
             translationSelectors.mobileMenuButton.setAttribute('aria-label', locale === 'zh' ? '打开导航菜单' : 'Open navigation menu');
+            if (translationSelectors.viewerClose) {
+                translationSelectors.viewerClose.setAttribute('aria-label', copy.viewerClose);
+            }
+            if (translationSelectors.viewerTitle && !translationSelectors.viewerModal.classList.contains('active')) {
+                setText(translationSelectors.viewerTitle, copy.viewerFallbackTitle);
+            }
             translationSelectors.langButtons.forEach((button) => {
                 button.classList.toggle('active', button.dataset.lang === locale);
             });
@@ -2074,6 +2409,50 @@
         }
         applyLanguage(currentLocale);
         typeEffect();
+
+        function closeViewer() {
+            translationSelectors.viewerModal.classList.remove('active');
+            translationSelectors.viewerModal.setAttribute('aria-hidden', 'true');
+            translationSelectors.viewerBody.innerHTML = '';
+            translationSelectors.viewerTitle.textContent = translations[currentLocale].viewerFallbackTitle;
+            document.body.style.overflow = '';
+        }
+
+        function openViewer(trigger) {
+            const src = trigger.dataset.viewSrc || trigger.getAttribute('href');
+            const viewType = trigger.dataset.viewType || 'image';
+            const title = currentLocale === 'zh'
+                ? (trigger.dataset.viewTitleZh || trigger.closest('.cert-content')?.querySelector('h4')?.textContent || translations[currentLocale].viewerFallbackTitle)
+                : (trigger.dataset.viewTitleEn || trigger.closest('.cert-content')?.querySelector('h4')?.textContent || translations[currentLocale].viewerFallbackTitle);
+
+            translationSelectors.viewerTitle.textContent = title;
+            translationSelectors.viewerBody.innerHTML = viewType === 'pdf'
+                ? '<iframe src="' + src + '#view=FitH" title="' + title + '"></iframe>'
+                : '<img src="' + src + '" alt="' + title + '">';
+            translationSelectors.viewerModal.classList.add('active');
+            translationSelectors.viewerModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        translationSelectors.viewTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                openViewer(trigger);
+            });
+        });
+
+        translationSelectors.viewerClose.addEventListener('click', closeViewer);
+        translationSelectors.viewerModal.addEventListener('click', (event) => {
+            if (event.target === translationSelectors.viewerModal) {
+                closeViewer();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && translationSelectors.viewerModal.classList.contains('active')) {
+                closeViewer();
+            }
+        });
 
         // ===== NAVBAR SCROLL =====
         const navbar = document.getElementById('navbar');
