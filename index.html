@@ -26,6 +26,32 @@
             --gradient-2: linear-gradient(135deg, #4a90e2 0%, #2B4365 100%);
             --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --nav-surface: rgba(10, 14, 23, 0.85);
+            --chip-surface: rgba(17, 24, 39, 0.9);
+            --hero-heading: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            --orb-opacity: 0.15;
+        }
+
+        body[data-theme="light"] {
+            --primary: #315c88;
+            --primary-light: #5c84ad;
+            --accent: #0f6cbd;
+            --accent-glow: rgba(15, 108, 189, 0.18);
+            --bg: #f3f7fb;
+            --bg-card: #ffffff;
+            --bg-card-hover: #edf4fb;
+            --text: #102a43;
+            --text-muted: #486581;
+            --text-dim: #6b7c93;
+            --border: rgba(16, 42, 67, 0.12);
+            --gradient-1: linear-gradient(135deg, #dfefff 0%, #eef5fb 100%);
+            --gradient-2: linear-gradient(135deg, #0f6cbd 0%, #315c88 100%);
+            --shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
+            --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.08);
+            --nav-surface: rgba(243, 247, 251, 0.86);
+            --chip-surface: rgba(255, 255, 255, 0.9);
+            --hero-heading: linear-gradient(135deg, #102a43 0%, #486581 100%);
+            --orb-opacity: 0.09;
         }
 
         * {
@@ -45,6 +71,7 @@
             color: var(--text);
             line-height: 1.7;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         body[data-lang="zh"] {
@@ -66,7 +93,7 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.15;
+            opacity: var(--orb-opacity);
             animation: float 20s infinite ease-in-out;
         }
 
@@ -126,7 +153,7 @@
         }
 
         nav.scrolled {
-            background: rgba(10, 14, 23, 0.85);
+            background: var(--nav-surface);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 0.7rem 0;
@@ -214,10 +241,30 @@
             align-items: center;
             gap: 0.35rem;
             padding: 0.25rem;
-            background: rgba(17, 24, 39, 0.9);
+            background: var(--chip-surface);
             border: 1px solid var(--border);
             border-radius: 999px;
             box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--chip-surface);
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--text);
+            border-color: var(--accent);
         }
 
         .lang-btn {
@@ -300,7 +347,7 @@
 
         /* ===== HERO SECTION ===== */
         .hero {
-            min-height: 100vh;
+            min-height: 88vh;
             display: flex;
             align-items: center;
             padding-top: 80px;
@@ -311,7 +358,7 @@
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
             align-items: center;
         }
 
@@ -339,11 +386,11 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.1rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            background: var(--hero-heading);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -462,8 +509,8 @@
 
         .hero-image-wrapper {
             position: relative;
-            width: 380px;
-            height: 380px;
+            width: 330px;
+            height: 330px;
         }
 
         .hero-image-wrapper::before {
@@ -502,28 +549,6 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-
-        .tech-float {
-            position: absolute;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 0.6rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--accent);
-            box-shadow: var(--shadow-sm);
-            animation: floatTech 6s infinite ease-in-out;
-        }
-
-        .tech-float:nth-child(3) { top: 10%; right: -20px; animation-delay: 0s; }
-        .tech-float:nth-child(4) { bottom: 20%; left: -30px; animation-delay: -2s; }
-        .tech-float:nth-child(5) { top: 50%; right: -40px; animation-delay: -4s; }
-
-        @keyframes floatTech {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
         }
 
         /* ===== ABOUT SECTION ===== */
@@ -1416,6 +1441,9 @@
                     <button class="lang-btn active" type="button" data-lang="en">EN</button>
                     <button class="lang-btn" type="button" data-lang="zh">中文</button>
                 </div>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode">
+                    <i class="fas fa-sun"></i>
+                </button>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1430,7 +1458,7 @@
                 <div class="hero-content">
                     <div class="hero-badge">
                         <i class="fas fa-circle" style="font-size: 8px;"></i>
-                        正在寻找解决方案工程师职位
+                        Open for opportunities
                     </div>
                     <h1>
                         你好，我是<br>
@@ -1477,9 +1505,6 @@
                     <div class="hero-image-wrapper">
                         <div class="hero-image-ring"></div>
                         <img src="kadazi.jpg" alt="Hope Kazadi">
-                        <div class="tech-float">TensorFlow</div>
-                        <div class="tech-float">PyTorch</div>
-                        <div class="tech-float">MATLAB</div>
                     </div>
                 </div>
             </div>
@@ -1958,7 +1983,7 @@
                 metaTitle: 'Hope Kazadi | Solutions Engineer & AI Graduate Researcher',
                 metaDescription: 'Hope Kazadi - Solutions Engineer and AI graduate researcher focused on intelligent energy, power systems, and automation.',
                 nav: ['Home', 'About', 'Skills', 'Education', 'Experience', 'Projects', 'Certificates', 'Contact'],
-                heroBadge: 'Open to solutions engineering opportunities',
+                heroBadge: 'Open for opportunities',
                 heroHeading: 'Hello, I am<br><span class="highlight">Hope Kazadi</span>',
                 heroDescription: 'AI graduate researcher with a strong foundation in electrical engineering and mechatronics. I work across power systems analysis, automation control, and intelligent energy solutions for modern infrastructure.',
                 heroButtons: ['Contact Me', 'View Resume', 'Download Resume'],
@@ -2020,6 +2045,8 @@
                 certificateLinkLabel: 'View Certificate',
                 viewerClose: 'Close viewer',
                 viewerFallbackTitle: 'Preview',
+                themeToggleLabelLight: 'Switch to light mode',
+                themeToggleLabelDark: 'Switch to dark mode',
                 contactHeader: ['Contact', 'Let\'s Connect', 'Open to roles, collaborations, and project conversations'],
                 contactTitle: 'Let\'s work together',
                 contactDescription: 'I am looking for opportunities in solutions engineering, AI applications, and energy systems. If you have a role or collaboration in mind, feel free to reach out.',
@@ -2035,7 +2062,7 @@
                 metaTitle: 'Hope Kazadi | 解决方案工程师 & AI 硕士',
                 metaDescription: 'Hope Kazadi - 解决方案工程师，人工智能硕士，专注于智能能源、电力系统与自动化控制。',
                 nav: ['首页', '关于', '技能', '教育', '经验', '项目', '证书', '联系'],
-                heroBadge: '正在寻找解决方案工程师职位',
+                heroBadge: 'Open for opportunities',
                 heroHeading: '你好，我是<br><span class="highlight">Hope Kazadi</span>',
                 heroDescription: '人工智能硕士，拥有扎实的电气工程与机电一体化基础。精通电力系统分析、自动化控制与智能能源解决方案，致力于数字能源领域的创新项目。',
                 heroButtons: ['联系我', '查看简历', '下载简历'],
@@ -2097,6 +2124,8 @@
                 certificateLinkLabel: '查看证书',
                 viewerClose: '关闭预览',
                 viewerFallbackTitle: '预览',
+                themeToggleLabelLight: '切换到浅色模式',
+                themeToggleLabelDark: '切换到深色模式',
                 contactHeader: ['联系我', '建立联系', '有项目合作机会或职位空缺？欢迎随时联系'],
                 contactTitle: '让我们合作',
                 contactDescription: '我正在寻找解决方案工程师、AI 应用工程师或能源系统相关的机会。如果您有合适的职位或项目合作意向，请随时与我联系。',
@@ -2145,6 +2174,7 @@
             footer: document.querySelector('footer p'),
             metaDescription: document.querySelector('meta[name="description"]'),
             langButtons: Array.from(document.querySelectorAll('.lang-btn')),
+            themeToggle: document.getElementById('themeToggle'),
             mobileMenuButton: document.getElementById('mobileMenuBtn'),
             viewerModal: document.getElementById('viewerModal'),
             viewerBody: document.getElementById('viewerBody'),
@@ -2154,7 +2184,9 @@
         };
 
         const storedLocale = localStorage.getItem('portfolioLang');
+        const storedTheme = localStorage.getItem('portfolioTheme') || 'dark';
         let currentLocale = storedLocale === 'am' ? 'zh' : storedLocale || 'en';
+        let currentTheme = storedTheme;
         let roles = translations[currentLocale].roles;
 
         function setText(element, value) {
@@ -2167,6 +2199,23 @@
             if (element) {
                 element.innerHTML = value;
             }
+        }
+
+        function updateThemeToggleLabel() {
+            const themeCopy = translations[currentLocale] || translations.en;
+            const nextThemeLabel = currentTheme === 'dark' ? themeCopy.themeToggleLabelLight : themeCopy.themeToggleLabelDark;
+            translationSelectors.themeToggle.setAttribute('aria-label', nextThemeLabel);
+            const icon = translationSelectors.themeToggle.querySelector('i');
+            if (icon) {
+                icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        }
+
+        function applyTheme(theme) {
+            currentTheme = theme === 'light' ? 'light' : 'dark';
+            document.body.dataset.theme = currentTheme;
+            localStorage.setItem('portfolioTheme', currentTheme);
+            updateThemeToggleLabel();
         }
 
         function applyLanguage(locale) {
@@ -2277,6 +2326,7 @@
             if (translationSelectors.viewerTitle && !translationSelectors.viewerModal.classList.contains('active')) {
                 setText(translationSelectors.viewerTitle, copy.viewerFallbackTitle);
             }
+            updateThemeToggleLabel();
             translationSelectors.langButtons.forEach((button) => {
                 button.classList.toggle('active', button.dataset.lang === locale);
             });
@@ -2407,6 +2457,7 @@
             }
             typingTimeoutId = setTimeout(typeEffect, typeSpeed);
         }
+        applyTheme(currentTheme);
         applyLanguage(currentLocale);
         typeEffect();
 
@@ -2439,6 +2490,10 @@
                 event.preventDefault();
                 openViewer(trigger);
             });
+        });
+
+        translationSelectors.themeToggle.addEventListener('click', () => {
+            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
 
         translationSelectors.viewerClose.addEventListener('click', closeViewer);
